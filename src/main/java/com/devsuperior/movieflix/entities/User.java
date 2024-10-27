@@ -42,8 +42,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews = new ArrayList<>();
 
     public User() {
 
@@ -92,10 +90,6 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-	
     public void addRole(Role role) {
     	roles.add(role);
     }
