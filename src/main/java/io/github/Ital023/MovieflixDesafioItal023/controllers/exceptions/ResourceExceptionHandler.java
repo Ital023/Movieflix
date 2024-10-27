@@ -2,6 +2,9 @@ package io.github.Ital023.MovieflixDesafioItal023.controllers.exceptions;
 
 import java.time.Instant;
 
+import io.github.Ital023.MovieflixDesafioItal023.controllers.dto.StandardErrorDTO;
+import io.github.Ital023.MovieflixDesafioItal023.controllers.dto.ValidationErrorDTO;
+import io.github.Ital023.MovieflixDesafioItal023.service.exceptions.DatabaseException;
 import io.github.Ital023.MovieflixDesafioItal023.service.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
