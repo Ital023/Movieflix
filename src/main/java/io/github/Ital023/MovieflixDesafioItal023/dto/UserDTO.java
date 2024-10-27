@@ -1,6 +1,7 @@
 package io.github.Ital023.MovieflixDesafioItal023.dto;
 
-import com.devsuperior.movieflix.entities.User;
+
+import io.github.Ital023.MovieflixDesafioItal023.entities.User;
 
 public class UserDTO {
 
