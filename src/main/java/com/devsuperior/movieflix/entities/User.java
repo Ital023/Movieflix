@@ -42,6 +42,8 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+	@OneToMany(mappedBy = "user")
+	private List<Review> reviews = new ArrayList<>();
 
     public User() {
 
@@ -93,7 +95,11 @@ public class User implements UserDetails {
     public void addRole(Role role) {
     	roles.add(role);
     }
-    
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
 	public boolean hasRole(String roleName) {
 		for (Role role : roles) {
 			if (role.getAuthority().equals(roleName)) {
