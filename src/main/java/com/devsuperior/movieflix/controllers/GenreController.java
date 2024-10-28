@@ -21,7 +21,7 @@ public class GenreController {
 
     @PreAuthorize("hasAnyRole('ROLE_VISITOR', 'ROLE_MEMBER')")
     @GetMapping
-    public ResponseEntity<List<GenreDTO>> findAll() {
+    public ResponseEntity<List<GenreDTO>> getAll() {
         List<GenreDTO> dtos = service.getAll();
         return ResponseEntity.ok().body(dtos);
     }
