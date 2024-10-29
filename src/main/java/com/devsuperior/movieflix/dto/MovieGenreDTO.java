@@ -15,6 +15,11 @@ public class MovieGenreDTO extends MovieDTO{
         this.genre = genre;
     }
 
+    public MovieGenreDTO(Long id, String title, String subTitle, Integer year, String imgUrl, GenreDTO genre) {
+        super(id, title, subTitle, year, imgUrl);
+        this.genre = genre;
+    }
+
     public MovieGenreDTO(Movie entity, String synopsis, GenreDTO genre) {
         super(entity);
         this.synopsis = synopsis;

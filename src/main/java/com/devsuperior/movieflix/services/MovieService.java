@@ -4,6 +4,7 @@ import com.devsuperior.movieflix.dto.MovieDTO;
 import com.devsuperior.movieflix.dto.MovieGenreDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class MovieService {
     @Autowired
     private MovieRepository repository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     @Transactional(readOnly = true)
     public MovieGenreDTO getById(Long id) {
         Movie entity = repository.findById(id)
@@ -32,10 +36,18 @@ public class MovieService {
 
 
     @Transactional(readOnly = true)
-    public Page<MovieDTO> getPaged(Pageable pageable) {
-        Page<MovieDTO> result = repository.searchMoviesWithoutGenres(pageable);
+    public Page<MovieDTO> getPaged(String genreIdString, Pageable pageable) {
+        Long genreId = Long.parseLong(genreIdString);
 
-        return result;
+        if(genreId == 0) {
+            return repository.searchMoviesWithoutGenres(pageable);
+
+        }
+
+        boolean idGenreExisting = genreRepository.existsById(genreId);
+        if(!idGenreExisting) throw new ResourceNotFoundException("Resource not found");
+        Page<Movie> result = repository.searchMoviesWithoutGenresById(genreId, pageable);
+        return result.map(x -> new MovieDTO(x));
     }
 
 }

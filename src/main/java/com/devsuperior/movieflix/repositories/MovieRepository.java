@@ -18,4 +18,10 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     )
     Page<MovieDTO> searchMoviesWithoutGenres(Pageable pageable);
 
+    @Query(value = "SELECT obj FROM Movie obj JOIN FETCH obj.genre " +
+            "WHERE obj.genre.id = :genreId",
+            countQuery = "SELECT COUNT(obj) FROM Movie obj JOIN obj.genre"
+    )
+    Page<Movie> searchMoviesWithoutGenresById(Long genreId,Pageable pageable);
+
 }
